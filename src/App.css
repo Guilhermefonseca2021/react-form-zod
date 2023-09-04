@@ -26,6 +26,16 @@
   outline-color: aquamarine;
 }
 
+.content form span {
+  color: red;
+  font-size: .7rem;
+}
+
+.content form span::before {
+  content: '⚠️';
+  color: red;
+}
+
 .content form button {
   margin-top: .7rem;
   width: 100%;

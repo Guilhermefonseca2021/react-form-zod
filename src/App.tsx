@@ -1,11 +1,22 @@
 // import { useState } from 'react';
 import './App.css'
 import { useForm } from 'react-hook-form'
+import * as zod from 'zod'
+import { zodResolver} from '@hookform/resolvers/zod'
 
+const createUserFormSchema = zod.object ({
+  email: zod.string()
+    .nonempty('O e-mail é obrigatorio')
+    .email('formato de e-mail invalido'),
+  password: zod.string()
+    .min(8, 'a senha precisa de no minimo 8 caracteres'),
+})
 
 function App() {
   // const { output, setOutput}  = useState('')
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: zodResolver(createUserFormSchema),
+  });
 
   function createUser(data: any) {
     console.log(data)
@@ -32,6 +43,7 @@ function App() {
               {...register('email')}
             />
           </div>
+          {errors.email && <span>{errors.email.message}</span> }
 
           <div>
             <label htmlFor=''>Senha</label>
@@ -40,6 +52,7 @@ function App() {
               {...register('password')}
             />
           </div>
+          {errors.password && <span>{errors.password.message}</span> }
 
           <button type='submit' name='name'>Salvar</button>
         </form>
