@@ -12,15 +12,18 @@ const createUserFormSchema = zod.object ({
     .min(8, 'a senha precisa de no minimo 8 caracteres'),
 })
 
+type createUserFormData = zod.infer<typeof createUserFormSchema>
+
 function App() {
   // const { output, setOutput}  = useState('')
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const { register, handleSubmit, formState: { errors } } = useForm<createUserFormData>({
     resolver: zodResolver(createUserFormSchema),
   });
 
   function createUser(data: any) {
     console.log(data)
     // setOutput(JSON.stringify(data, null, 2))
+    
   }
 
   return (
