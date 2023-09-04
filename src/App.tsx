@@ -5,6 +5,13 @@ import * as zod from 'zod'
 import { zodResolver} from '@hookform/resolvers/zod'
 
 const createUserFormSchema = zod.object ({
+  name: zod.string()
+    .nonempty('O nom é obrigatorio')
+    .transform(name => {
+      return name.trim().split(' ').map(word => {
+        return word[0].toLocaleUpperCase().concat(word.substring(1))
+      }).join(' ')
+    }),
   email: zod.string()
     .nonempty('O e-mail é obrigatorio')
     .email('formato de e-mail invalido'),
@@ -39,6 +46,14 @@ function App() {
       <div className="content">
         {/* indicar uma action para o zod executar uma funcao de criar chamadas para API */}
         <form action='' onSubmit={handleSubmit(createUser)}>
+          <div>
+            <label htmlFor=''>Nome</label>
+            <input 
+              type='text' 
+              {...register('name')}
+            />
+          </div>
+
           <div>
             <label htmlFor=''>E-mail</label>
             <input 
