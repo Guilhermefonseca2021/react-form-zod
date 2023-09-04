@@ -39,7 +39,7 @@ handleSubmit(enviar nosso formulario como requisicao para back-end) que é passa
 </-span>
 
 
-<h3> document validacao com ZOD <h3>
+<h3> document validacao com ZOD </h3>
 
 *nosso zod trabalha a validação dos campos pelo nosso name setado pelo useForm.
 
@@ -93,7 +93,7 @@ com isso acima posso disparar as mensagens declaradas no zod.object ao usuario a
 {errors.email && <span> {errors.email.message}</span> }
 
 
-<h3> tipagem (inteligencia para os campos do zod) <h3>
+<h3> tipagem (inteligencia para os campos do zod) </h3>
 
 1. criamos um type que vai receber o metodo .infer do zod(inferencia vem de determinar de forma automatica com base no typo do que eu declarar)
 
